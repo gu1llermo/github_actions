@@ -14,7 +14,7 @@ class MainApp extends StatelessWidget {
     return const MaterialApp(
       home: Scaffold(
         body: Center(
-          child: Text('API_KEY= $apiKey'),
+          child: SizedBox(width: 300, child: Text('API_KEY= $apiKey')),
         ),
       ),
     );

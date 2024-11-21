@@ -1,3 +1,0 @@
-var env = {
-    SUPABASE_ANON_KEY: "TU_SUPABASE_ANON_KEY"
-  };

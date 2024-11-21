@@ -1,0 +1,52 @@
+name: Deploy Flutter Web
+on:
+  push:
+    branches: [ main ]  # O 'master' según tu rama principal
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      # Configurar Flutter
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.25'
+          channel: 'stable'
+      
+      # Obtener dependencias
+      - run: flutter pub get
+      
+      # Construir para web
+      - run: flutter build web --release --dart-define=API_KEY=${{ secrets.API_KEY }}
+      
+      # Configurar Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      
+      # Subir artifact
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'build/web'
+      
+      # Desplegar en GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

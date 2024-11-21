@@ -5,6 +5,7 @@ void main() {
 }
 
 const apiKey = String.fromEnvironment('API_KEY');
+const secret = String.fromEnvironment('SECRET');
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -14,7 +15,12 @@ class MainApp extends StatelessWidget {
     return const MaterialApp(
       home: Scaffold(
         body: Center(
-          child: SizedBox(width: 300, child: Text('API_KEY= $apiKey')),
+          child: Column(
+            children: [
+              SizedBox(width: 300, child: Text('API_KEY= $apiKey')),
+              SizedBox(width: 300, child: Text('Secret= $secret')),
+            ],
+          ),
         ),
       ),
     );

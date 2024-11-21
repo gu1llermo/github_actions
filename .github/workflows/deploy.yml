@@ -27,14 +27,14 @@ jobs:
       # Configurar Flutter
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.25'
-          channel: 'stable'
+          channel: 'stable'  # Esto usará la última versión estable de Flutter
       
-      # Obtener dependencias
+      # Obtener dependencias y activar web
+      - run: flutter config --enable-web
       - run: flutter pub get
       
       # Construir para web
-      - run: flutter build web --release --dart-define=API_KEY=${{ secrets.API_KEY }}
+      - run: flutter build web --release --dart-define=API_KEY=${{ secrets.API_KEY }} --base-href /github_actions/
       
       # Configurar Pages
       - name: Setup Pages

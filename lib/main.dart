@@ -5,6 +5,10 @@ void main() {
 }
 
 const apiKey = String.fromEnvironment('API_KEY');
+// probé en github pages y me parece que colocó un string vacío
+// y en el emulador de android también, así que por lo que veo
+// que si no lo consigue regresa un string vacío, pero no genera error
+
 const secret = String.fromEnvironment('SECRET');
 
 class MainApp extends StatelessWidget {
@@ -16,6 +20,7 @@ class MainApp extends StatelessWidget {
       home: Scaffold(
         body: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(width: 300, child: Text('API_KEY= $apiKey')),
               SizedBox(width: 300, child: Text('Secret= $secret')),

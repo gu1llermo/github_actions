@@ -34,7 +34,7 @@ jobs:
       - run: flutter pub get
       
       # Construir para web
-      - run: flutter build web --release --dart-define=API_KEY=${{ secrets.API_KEY }} --base-href /github_actions/
+      - run: flutter build web --release --dart-define=API_KEY=${{ secrets.API_KEY }} --dart-define=SECRET=${{ secrets.SECRET }} --base-href /github_actions/
       
       # Configurar Pages
       - name: Setup Pages

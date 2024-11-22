@@ -32,9 +32,17 @@ jobs:
       # Obtener dependencias y activar web
       - run: flutter config --enable-web
       - run: flutter pub get
+      - name: Create env file
+        run: |
+          echo "API_KEY=${{ secrets.API_KEY }}" > .env
+          echo "SECRET=${{ secrets.SECRET }}" >> .env
       
       # Construir para web
-      - run: flutter build web --release --dart-define=API_KEY=${{ secrets.API_KEY }} --dart-define=SECRET=${{ secrets.SECRET }} --base-href /github_actions/
+      - run: |
+          flutter build web \
+            --dart-define=API_KEY=${{ secrets.API_KEY }} \
+            --dart-define=SECRET=${{ secrets.SECRET }} \
+            --base-href /github_actions/
       
       # Configurar Pages
       - name: Setup Pages
